@@ -7,7 +7,7 @@ const ProfileButton = async () => {
 
   return (
     <Link
-      href={!session.session ? "/profile" : "/login"}
+      href={session.session ? "/profile" : "/login"}
       aria-label="프로필로 이동"
     >
       <div className="pl-3 pr-3">
