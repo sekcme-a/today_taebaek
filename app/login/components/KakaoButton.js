@@ -21,6 +21,7 @@ export default function KakaoButton() {
     >
       <Image
         src="/images/kakao.png"
+        alt="카카오톡 로그인"
         width={600}
         height={600}
         style={{

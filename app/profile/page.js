@@ -2,12 +2,14 @@
 
 import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Profile = () => {
   const router = useRouter();
+  const supabase = createBrowserSupabaseClient();
 
   const handleLogout = async () => {
-    const supabase = createBrowserSupabaseClient();
+    console.log("asdf");
     await supabase.auth.signOut();
     router.replace("/");
   };

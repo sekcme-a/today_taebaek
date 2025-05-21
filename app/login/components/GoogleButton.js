@@ -21,6 +21,7 @@ export default function GoogleButton() {
     >
       <Image
         src="/images/google.png"
+        alt="구글 로그인"
         width={600}
         height={600}
         style={{
