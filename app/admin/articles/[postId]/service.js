@@ -36,10 +36,15 @@ export const updateArticlesImages = async (id, imageUrls) => {
   if (error) throw error;
 };
 
-// ISO8601 UTC 포맷으로 변환 (명확한 시각을 붙여서 Supabase에 저장)
 const toIsoData = (dateString) => {
-  const isoDate = new Date(dateString + "T00:00:00Z").toISOString();
-  return isoDate;
+  const date = new Date(dateString);
+  // 현재 시간을 사용하여 날짜와 시간 정보를 포함
+  date.setHours(
+    new Date().getHours(),
+    new Date().getMinutes(),
+    new Date().getSeconds()
+  );
+  return date.toISOString();
 };
 
 export const insertArticle = async ({

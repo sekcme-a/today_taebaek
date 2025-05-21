@@ -36,7 +36,7 @@ const EditPostPage = () => {
     new Date().toISOString().slice(0, 10)
   ); // YYYY-MM-DD 형식
   const [content, setContent] = useState("");
-  const [selectedCategory, setselectedCategory] = useState({});
+  const [selectedCategory, setselectedCategory] = useState("");
   const [isHeadline, setIsHeadline] = useState(false);
   const [isPublished, setIsPublished] = useState(true);
   const [isEditorPick, setIsEditorPick] = useState(false);
@@ -84,7 +84,7 @@ const EditPostPage = () => {
       alert("제목, 기자, 작성일, 내용을 모두 입력해주세요.");
       return;
     }
-    if (!selectedCategory || selectedCategory?.length === 0) {
+    if (!selectedCategory || selectedCategory === "") {
       alert("카테고리를 선택해주세요.");
       return;
     }
@@ -156,7 +156,8 @@ const EditPostPage = () => {
   const handleDelete = async () => {
     if (confirm("정말로 삭제하시겠습니까?")) {
       await deleteArticle(postId);
-      await deleteImages(initialImages.map((f) => f.url));
+      if (initialImages.length > 0)
+        await deleteImages(initialImages.map((f) => f.url));
       router.back();
     }
   };
