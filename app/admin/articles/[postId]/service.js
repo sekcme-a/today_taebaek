@@ -1,6 +1,6 @@
-"use server";
+"use client";
 
-import { createServerSupabaseClient } from "@/utils/supabase/server";
+import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 
 function handleError(error) {
   if (error) {
@@ -11,7 +11,7 @@ function handleError(error) {
 
 export const fetchArticlesImages = async (id) => {
   console.log("asdf");
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createBrowserSupabaseClient();
   const { data, error } = await supabase
     .from("articles")
     .select("images")
@@ -26,7 +26,7 @@ export const fetchArticlesImages = async (id) => {
 };
 
 export const updateArticlesImages = async (id, imageUrls) => {
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createBrowserSupabaseClient();
 
   const { error } = await supabase
     .from("articles")
@@ -54,7 +54,7 @@ export const insertArticle = async ({
   isEditorPick,
   isBreakingNews,
 }) => {
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createBrowserSupabaseClient();
 
   const { data, error } = await supabase
     .from("articles")
@@ -94,7 +94,7 @@ export const updateArticle = async ({
   isBreakingNews,
   isEditorPick,
 }) => {
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createBrowserSupabaseClient();
 
   const { error } = await supabase
     .from("articles")
@@ -120,7 +120,7 @@ export const updateArticle = async ({
 };
 
 export const fetchArticle = async (id) => {
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createBrowserSupabaseClient();
   const { data, error } = await supabase
     .from("articles")
     .select("*")
@@ -132,7 +132,7 @@ export const fetchArticle = async (id) => {
   return data;
 };
 export const deleteArticle = async (id) => {
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createBrowserSupabaseClient();
   const { error } = await supabase.from("articles").delete().eq("id", id);
 
   handleError(error);

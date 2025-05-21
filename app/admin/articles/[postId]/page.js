@@ -103,6 +103,7 @@ const EditPostPage = () => {
         isEditorPick,
         isBreakingNews,
       }).catch((e) => {
+        console.log(e);
         alert("실패: " + e.message);
         return;
       });
@@ -121,6 +122,7 @@ const EditPostPage = () => {
         isEditorPick,
         isBreakingNews,
       }).catch((e) => {
+        console.log(e);
         alert("실패: " + e.message);
       });
 
@@ -146,6 +148,7 @@ const EditPostPage = () => {
 
       if (postId === "new") router.replace(`/admin/articles/${currentPostId}`);
     } catch (e) {
+      console.log(e);
       alert("실패: " + e.message);
     }
   };
