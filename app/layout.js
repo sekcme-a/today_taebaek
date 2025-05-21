@@ -27,6 +27,14 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        <meta
+          name="google-site-verification"
+          content="Tkt6-uvPtVRMzLJvNbtD_ChtLE1u1kZqiwQ6Y0yxdBg"
+        />
+        <meta
+          name="naver-site-verification"
+          content="90f934a8b0698cd8da2045fcb99ca96454b8573f"
+        />
       </head>
       <body
         className={[
