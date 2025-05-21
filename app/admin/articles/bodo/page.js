@@ -17,6 +17,8 @@ const Bodo = () => {
   const imageRef = useRef([]);
 
   const [cropBy, setCropBy] = useState("www.taebaek.go.kr\n");
+  const [newLineCount, setNewLineCount] = useState(4);
+
   const [input, setInput] = useState(``);
 
   const [articles, setArticles] = useState([]);
@@ -29,10 +31,19 @@ const Bodo = () => {
     const list = input.split(cropBy);
     const transformed = list.slice(1).map((item, index) => {
       const trimmed = item.replace(/^\s+/, "");
-      const seperated = trimmed.split("\n\n");
-      const titleAndSubtitle = seperated[0]?.split("-");
-      const title = titleAndSubtitle[0]?.trim();
-      const subtitle = titleAndSubtitle[1]?.trim();
+
+      const seperated = trimmed.split("\n".repeat(newLineCount));
+
+      let title = "";
+      let subtitle = "";
+      //제목+부제목 부분에 "-" 가 2개 있을때 부제목 있는걸로 인식
+      if (seperated[0]?.split("-").length - 1 === 2) {
+        const titleAndSubtitle = seperated[0]?.split("-");
+        title = titleAndSubtitle[0]?.trim();
+        subtitle = titleAndSubtitle[1]?.trim();
+      } else {
+        title = seperated[0];
+      }
       const content = seperated[1].replace(/\n+$/, "");
 
       const imgs = currentImages.filter(
@@ -89,12 +100,21 @@ const Bodo = () => {
 
   return (
     <div className="p-4">
+      <p className="font-bold text-xl">보도자료 추출</p>
+      <p className="font-bold text-lg mt-5">추출 설정</p>
       <p className="mb-2">*기사 제목이 시작되기 바로 전 문장을 입력해주세요.</p>
       <Input
         label="분할 기준"
         value={cropBy}
         onChange={(e) => setCropBy(e.target.value)}
-        rows={20}
+      />
+      <p className="mb-2 mt-2">
+        *기사 제목+부제목 과 기사 내용 사이의 줄바꿈 수{" "}
+      </p>
+      <Input
+        label="줄바꿈 수"
+        value={newLineCount}
+        onChange={(e) => setNewLineCount(e.target.value)}
       />
       <div className="h-4" />
       <p className="mt-4 mb-2">
