@@ -17,7 +17,7 @@ export async function GET(request) {
   const endDate = endParam ? parseDate(endParam) : null;
 
   const maxArticles = 50;
-  let currentPage = startPage;
+  let currentPage = startPage.toString() === "0" ? 1 : startPage;
   let articles = [];
 
   try {
@@ -100,6 +100,9 @@ export async function GET(request) {
       }
 
       if (addedThisPage === 0 && articles.length !== 0) break;
+
+      //페이지 고정일 경우 반복 X
+      if (startPage.toString() !== 0) break;
 
       currentPage++;
     }

@@ -19,7 +19,7 @@ export default function CrawledLinks() {
   const [posts, setPosts] = useState([]);
   const [start, setStart] = useState(todayDate());
   const [end, setEnd] = useState(todayDate());
-  const [startPage, setStartPage] = useState("1");
+  const [startPage, setStartPage] = useState("0");
   const [loading, setLoading] = useState(false);
 
   const [openRoom, setOpenRoom] = useState(false);
@@ -64,8 +64,8 @@ export default function CrawledLinks() {
       />
       <div className="mt-4" />
       <Input
-        label="시작 페이지"
-        placeholder="검색을 시작할 목차 페이지"
+        label="페이지 고정"
+        placeholder="검색을 시작할 목차 페이지 고정"
         value={startPage}
         onChange={(e) => setStartPage(e.target.value)}
       />
