@@ -3,6 +3,24 @@ import { useState } from "react";
 
 const Room = ({ setOpenRoom, posts }) => {
   const [page, setPage] = useState(0);
+
+  // 담당부서 문구 빼고 기자명 삽입
+  const refineContent = () => {
+    const AUTHORS = [
+      "송현서 기자",
+      "송현서 기자",
+      "송현서 기자",
+      "송현서 기자",
+      "김균식 기자",
+    ];
+    const randomNum = Math.floor(Math.random() * AUTHORS.length);
+
+    const content = posts[page]?.content;
+    const splitDamDang = content?.split("담당 부서 : ");
+    const removeDamDang = splitDamDang[0];
+    const addAuthor = removeDamDang + AUTHORS[randomNum];
+    return addAuthor;
+  };
   return (
     <div className="p-5 pt-1">
       <Button onClick={() => setOpenRoom(false)} fullWidth>
@@ -32,7 +50,7 @@ const Room = ({ setOpenRoom, posts }) => {
       <Button
         fullWidth
         style={{ height: "15vh", marginBottom: "2vh" }}
-        onClick={() => navigator.clipboard.writeText(posts[page]?.content)}
+        onClick={() => navigator.clipboard.writeText(refineContent())}
       >
         내용 붙혀넣기
       </Button>

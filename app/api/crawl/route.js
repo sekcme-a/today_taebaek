@@ -72,7 +72,7 @@ export async function GET(request) {
   const startDate = new Date(startDateStr);
   const endDate = new Date(endDateStr);
 
-  const maxCount = 50;
+  const maxCount = 100;
   let currentPage = 1;
   let collected = [];
 
@@ -113,11 +113,10 @@ export async function GET(request) {
           addedThisPage++;
         }
       }
-
-      if (addedThisPage === 0) break;
+      if (addedThisPage === 0 && collected.length !== 0) break;
       currentPage++;
     }
-    console.log(collected);
+
     return NextResponse.json({ posts: collected });
   } catch (err) {
     console.error("크롤링 중 오류:", err);
