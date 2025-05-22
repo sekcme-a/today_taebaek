@@ -3,23 +3,24 @@ import { useState } from "react";
 
 const AnsanRoom = ({ setOpenRoom, posts }) => {
   const [page, setPage] = useState(0);
-
   function cleanText(raw) {
     let text = raw;
 
-    // 1. "사진 확대보기" 이후 첫 줄글자 나올 때까지 줄바꿈 제거
-    const photoIndex = text.indexOf("사진 확대보기");
-    if (photoIndex !== -1) {
+    // 1. "사진 확대보기"가 여러 번 있을 수 있으므로 반복 처리
+    while (text.includes("사진 확대보기")) {
+      const photoIndex = text.indexOf("사진 확대보기");
+      if (photoIndex === -1) break;
+
       const before = text.slice(0, photoIndex);
       let after = text.slice(photoIndex + "사진 확대보기".length);
 
-      // 줄바꿈/공백/탭만 제거하고, 첫 문장 시작 지점 찾기
-      const firstContentMatch = after.match(/[^\n\s]/); // 처음으로 줄바꿈/공백 아닌 문자
+      const firstContentMatch = after.match(/[^\n\s]/); // 공백/줄바꿈이 아닌 첫 문자 찾기
       if (firstContentMatch) {
         const firstContentIndex = after.indexOf(firstContentMatch[0]);
-        after = after.slice(firstContentIndex); // 그 이후부터 사용
-        text = before + after; // 다시 조합
+        after = after.slice(firstContentIndex);
       }
+
+      text = before + after;
     }
 
     // 2. &nbsp; → 일반 공백
