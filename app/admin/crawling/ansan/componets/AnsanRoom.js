@@ -45,7 +45,7 @@ const AnsanRoom = ({ setOpenRoom, posts }) => {
     ];
     const randomNum = Math.floor(Math.random() * AUTHORS.length);
 
-    return cleanText(posts[page]?.content) + `\n\n${randomNum}`;
+    return cleanText(posts[page]?.content) + `\n\n${AUTHORS[randomNum]}`;
   };
 
   return (
