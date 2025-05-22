@@ -2,25 +2,30 @@
 import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import Room from "./componets/Room";
+import AnsanRoom from "./componets/AnsanRoom";
 
 export default function CrawledLinks() {
   const [posts, setPosts] = useState([]);
-  const [start, setStart] = useState("2025-05-21");
-  const [end, setEnd] = useState("2025-05-21");
+  const [start, setStart] = useState("2025-05-22");
+  const [end, setEnd] = useState("2025-05-22");
   const [loading, setLoading] = useState(false);
 
   const [openRoom, setOpenRoom] = useState(false);
 
   const handleCrawl = async () => {
+    if (new Date(start) > new Date(end)) {
+      alert("시작일이 종료일보다 큽니다.");
+      return;
+    }
     setLoading(true);
-    const res = await fetch(`/api/crawl?start=${start}&end=${end}`);
+    const res = await fetch(`/api/ansan?start=${start}&end=${end}`);
     const data = await res.json();
-    setPosts(data.posts);
+    console.log(data);
+    setPosts(data.articles);
     setLoading(false);
   };
 
-  if (openRoom) return <Room setOpenRoom={setOpenRoom} posts={posts} />;
+  if (openRoom) return <AnsanRoom setOpenRoom={setOpenRoom} posts={posts} />;
   return (
     <div className="p-5">
       <p>형식에 맞게! 입력해주세요.</p>
@@ -42,7 +47,7 @@ export default function CrawledLinks() {
       <Button
         onClick={() =>
           window.open(
-            "http://www.shinews.co.kr/adm/news/addArticleForm.do?vStartP=123415184",
+            "http://www.asinews.co.kr/adm/news/addArticleForm.do?vStartP=123415184",
             "_blank"
           )
         }

@@ -26,6 +26,15 @@ export default function AdminPage() {
       >
         메인페이지 관리
       </Button>
+      <Button onClick={() => router.push("/admin/crawling")} className="ml-4">
+        시흥인터넷뉴스 업로드
+      </Button>
+      <Button
+        onClick={() => router.push("/admin/crawling/ansan")}
+        className="ml-4"
+      >
+        안산인터넷뉴스 업로드
+      </Button>
     </div>
   );
 }
