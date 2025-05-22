@@ -4,10 +4,22 @@ import { Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import Room from "./componets/Room";
 
+const todayDate = () => {
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
+  const day = String(today.getDate()).padStart(2, "0");
+
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+};
+
 export default function CrawledLinks() {
   const [posts, setPosts] = useState([]);
-  const [start, setStart] = useState("2025-05-21");
-  const [end, setEnd] = useState("2025-05-21");
+  const [start, setStart] = useState(todayDate());
+  const [end, setEnd] = useState(todayDate());
   const [loading, setLoading] = useState(false);
 
   const [openRoom, setOpenRoom] = useState(false);
