@@ -19,21 +19,29 @@ export default function CrawledLinks() {
   const [posts, setPosts] = useState([]);
   const [start, setStart] = useState(todayDate());
   const [end, setEnd] = useState(todayDate());
+  const [startPage, setStartPage] = useState("1");
   const [loading, setLoading] = useState(false);
 
   const [openRoom, setOpenRoom] = useState(false);
 
   const handleCrawl = async () => {
-    if (new Date(start) > new Date(end)) {
-      alert("시작일이 종료일보다 큽니다.");
-      return;
+    try {
+      if (new Date(start) > new Date(end)) {
+        alert("시작일이 종료일보다 큽니다.");
+        return;
+      }
+      setLoading(true);
+      const res = await fetch(
+        `/api/ansan?start=${start}&end=${end}&page${startPage}`
+      );
+      const data = await res.json();
+      console.log(data);
+      setPosts(data.articles);
+      setLoading(false);
+    } catch (e) {
+      alert("너무 오래걸립니다. 시작페이지를 조정해주세요.");
+      alert(e);
     }
-    setLoading(true);
-    const res = await fetch(`/api/ansan?start=${start}&end=${end}`);
-    const data = await res.json();
-    console.log(data);
-    setPosts(data.articles);
-    setLoading(false);
   };
 
   if (openRoom) return <AnsanRoom setOpenRoom={setOpenRoom} posts={posts} />;
@@ -53,6 +61,13 @@ export default function CrawledLinks() {
         placeholder="2025-09-13"
         value={end}
         onChange={(e) => setEnd(e.target.value)}
+      />
+      <div className="mt-4" />
+      <Input
+        label="시작 페이지"
+        placeholder="검색을 시작할 목차 페이지"
+        value={startPage}
+        onChange={(e) => setStartPage(e.target.value)}
       />
       <div className="mt-4" />
       <Button

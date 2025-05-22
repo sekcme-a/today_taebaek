@@ -11,12 +11,13 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const startParam = searchParams.get("start");
   const endParam = searchParams.get("end");
+  const startPage = searchParams.get("page");
 
   const startDate = startParam ? parseDate(startParam) : null;
   const endDate = endParam ? parseDate(endParam) : null;
 
   const maxArticles = 50;
-  let currentPage = 1;
+  let currentPage = startPage;
   let articles = [];
 
   try {
