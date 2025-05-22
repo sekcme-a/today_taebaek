@@ -32,7 +32,7 @@ export default function CrawledLinks() {
       }
       setLoading(true);
       const res = await fetch(
-        `/api/ansan?start=${start}&end=${end}&page${startPage}`
+        `/api/ansan?start=${start}&end=${end}&page=${startPage}`
       );
       const data = await res.json();
       console.log(data);
