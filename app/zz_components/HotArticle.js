@@ -13,7 +13,7 @@ const HotArticle = async ({ pageSize = 15 }) => {
     <section className="pl-4 pr-4 md:pr-0">
       <h2 className="text-xl font-bold mt-4 italic"># 최근 많이 본 뉴스</h2>
       <ul>
-        {data.map((item) => (
+        {data?.map((item) => (
           <Link
             key={item.id}
             href={`/article/${item.id}`}

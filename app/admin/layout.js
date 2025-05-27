@@ -27,6 +27,10 @@ export default async function AdminLayout({ children }) {
   }
 
   return (
-    <main className="bg-gray-100 text-black min-h-screen">{children}</main>
+    <main
+    // className="bg-gray-100 text-black min-h-screen"
+    >
+      {children}
+    </main>
   );
 }

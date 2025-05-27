@@ -13,7 +13,7 @@ const BreakingNews = async () => {
   if (articles.length > 0)
     return (
       <section>
-        {articles.map((article, index) => (
+        {articles?.map((article, index) => (
           <ArticleThumbnail
             article={article}
             fullArticle={article.content}

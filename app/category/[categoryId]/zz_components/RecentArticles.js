@@ -16,7 +16,7 @@ const RecentArticles = async ({ categoryId }) => {
   return (
     <section>
       <ul>
-        {articles.map((article, index) => {
+        {articles?.map((article, index) => {
           return <ArticleThumbnail key={index} article={article} />;
         })}
       </ul>

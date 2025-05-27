@@ -14,7 +14,7 @@ const EditorPick = async () => {
     <section className="pl-4 pr-4 md:pr-0">
       <h2 className="text-xl font-bold mt-4 italic"># 에디터 픽</h2>
       <ul>
-        {data.map((item) => (
+        {data?.map((item) => (
           <Link
             key={item.id}
             href={`/article/${item.id}`}

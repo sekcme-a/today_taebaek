@@ -8,7 +8,7 @@ const SeoSafeSwiper = ({ articles, renderSlide }) => {
   return (
     <div className={`swiper ${swiperId}`}>
       <ul className="swiper-wrapper">
-        {articles.map((article) => (
+        {articles?.map((article) => (
           <li key={article.id} className="swiper-slide">
             {renderSlide(article)}
           </li>
@@ -18,7 +18,7 @@ const SeoSafeSwiper = ({ articles, renderSlide }) => {
       <div
         className={`custom-pagination ${swiperId} flex justify-center mt-3 hidden`}
       >
-        {articles.map((_, idx) => (
+        {articles?.map((_, idx) => (
           <button
             key={idx}
             className="pagination-bullet w-2 h-2 bg-gray-500 rounded-full mx-1"

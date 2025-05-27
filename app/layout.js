@@ -10,8 +10,18 @@ export { metadata };
 const theme = {
   input: {
     defaultProps: {
-      color: "black",
-      className: "text-black placeholder:text-gray-400",
+      color: "white",
+      // className: "text-black placeholder:text-gray-400",
+    },
+  },
+  button: {
+    defaultProps: {
+      color: "green",
+    },
+  },
+  textarea: {
+    defaultProps: {
+      color: "white", // 색상을 white로 설정
     },
   },
 };

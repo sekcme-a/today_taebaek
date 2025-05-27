@@ -15,7 +15,7 @@ const CategoryArticles = async () => {
         카테고리 별 뉴스
       </h4>
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {data.data.map((categoryId) => (
+        {data.data?.map((categoryId) => (
           <CategoryArticle key={categoryId} categoryId={categoryId} />
         ))}
       </ul>

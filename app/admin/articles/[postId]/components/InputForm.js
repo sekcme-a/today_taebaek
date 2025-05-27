@@ -87,7 +87,7 @@ const InputForm = ({
         label="내용"
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        className="mb-4"
+        variant="standard"
         required
         rows={10}
       />

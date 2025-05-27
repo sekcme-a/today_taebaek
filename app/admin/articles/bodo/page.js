@@ -73,7 +73,7 @@ const Bodo = () => {
   const onSaveClick = async () => {
     setSaving(true);
     await Promise.all(
-      articles.map(async (article) => {
+      articles?.map(async (article) => {
         const newPostId = await insertArticle({
           title: article.title,
           subtitle: article.subtitle,
@@ -136,7 +136,7 @@ const Bodo = () => {
       <Button onClick={onTranformClick} className="mt-3" fullWidth>
         추출
       </Button>
-      {articles.map((item, index) => {
+      {articles?.map((item, index) => {
         return (
           <div key={index} className="my-20 flex">
             <h3 className="mr-5 text-3xl">{index + 1}.</h3>

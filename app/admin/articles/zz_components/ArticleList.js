@@ -50,27 +50,27 @@ const ArticleList = ({ page }) => {
               </p>
               <div className="flex items-center">
                 {article.is_headline && (
-                  <p className="text-purple-700 mr-4 font-bold">헤드라인</p>
+                  <p className="text-purple-300 mr-4 font-bold">헤드라인</p>
                 )}
                 {article.is_breaking_news && (
-                  <p className="text-purple-700 mr-4 font-bold">속보</p>
+                  <p className="text-purple-300 mr-4 font-bold">속보</p>
                 )}
                 {article.is_editor_pick && (
-                  <p className="text-purple-700 mr-4 font-bold">에디터 픽</p>
+                  <p className="text-purple-300 mr-4 font-bold">에디터 픽</p>
                 )}
                 {!article.category_id && (
-                  <p className="text-red-700 mr-4 ">카테고리 없음</p>
+                  <p className="text-red-300 mr-4 ">카테고리 없음</p>
                 )}
                 <p
                   className={`${
-                    article.is_published ? "text-green-700" : "text-red-700"
+                    article.is_published ? "text-green-300" : "text-red-300"
                   } mr-4`}
                 >
                   {article.is_published ? "게제 중" : "미게재"}
                 </p>
                 {!article.images ||
                   (article.images.length === 0 && (
-                    <p className="text-red-700">이미지 없음</p>
+                    <p className="text-red-300">이미지 없음</p>
                   ))}
               </div>
             </div>

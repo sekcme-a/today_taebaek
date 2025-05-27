@@ -28,7 +28,7 @@ export async function GET() {
     .from("articles")
     .select("id, created_at");
 
-  const articleURLs = articles.map((article) => ({
+  const articleURLs = articles?.map((article) => ({
     loc: `${baseUrl}/article/${article.id}`,
     lastmod: new Date(article.created_at).toISOString(),
     changefreq: "yearly",

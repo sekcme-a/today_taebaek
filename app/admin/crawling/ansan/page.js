@@ -70,7 +70,7 @@ export default function CrawledLinks() {
         onChange={(e) => setStartPage(e.target.value)}
       />
       <div className="mt-4" />
-      <Button
+      {/* <Button
         onClick={() =>
           window.open(
             "http://www.asinews.co.kr/adm/news/addArticleForm.do?vStartP=123415184",
@@ -81,10 +81,15 @@ export default function CrawledLinks() {
         style={{ marginBottom: 10 }}
       >
         기사 등록 페이지 열기
-      </Button>
+      </Button> */}
       <Button onClick={handleCrawl} fullWidth disabled={loading}>
         {loading ? "받아오는 중 " : "크롤링"}
       </Button>
+      {posts.length > 0 && (
+        <Button onClick={() => setOpenRoom(true)} fullWidth className="mt-3">
+          이동
+        </Button>
+      )}
       <h1 className="text-2xl font-bold mt-10">크롤링된 링크</h1>
       <p>총{posts?.length}개</p>
       <ul>
@@ -99,11 +104,6 @@ export default function CrawledLinks() {
           </li>
         ))}
       </ul>
-      {posts.length > 0 && (
-        <Button onClick={() => setOpenRoom(true)} fullWidth>
-          이동
-        </Button>
-      )}
     </div>
   );
 }

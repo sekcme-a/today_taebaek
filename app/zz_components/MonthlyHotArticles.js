@@ -36,7 +36,7 @@ const MontlyHotArticles = async ({
           <p className="text-md ml-2 font-bold">{`#${catName}`} </p>
         </div>
 
-        {articles.map((article, index) => (
+        {articles?.map((article, index) => (
           <Link
             key={index}
             href={`/article/${article.id}`}

@@ -36,7 +36,7 @@ const CategoryArticle = async ({ key, categoryId }) => {
             />
           </div>
         </Link>
-        {articles.map((article, index) => (
+        {articles?.map((article, index) => (
           <Link
             href={`/article/${article.id}`}
             key={article.id}

@@ -26,6 +26,9 @@ export default function AdminPage() {
       >
         메인페이지 관리
       </Button>
+      <Button onClick={() => router.push("/admin/routine")} className="ml-4">
+        평일 루틴
+      </Button>
       <Button
         onClick={() => router.push("/admin/crawling/ansan")}
         className="ml-4"
