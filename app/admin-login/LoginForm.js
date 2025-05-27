@@ -41,7 +41,7 @@ export default function LoginForm() {
   };
 
   return (
-    <Card className="shadow-lg">
+    <Card className="shadow-lg bg-black">
       <CardBody className="space-y-4">
         <form onSubmit={handleLogin} className="space-y-4">
           <div>

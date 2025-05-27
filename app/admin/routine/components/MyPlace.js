@@ -46,7 +46,7 @@ const MyPlace = () => {
         복사하기
       </Button>
       <Button
-        onClick={() => window.open("http://m-place.kr", "_blank")}
+        onClick={() => window.open("https://chatgpt.com/", "_blank")}
         fullWidth
         className="mt-1"
         color="deep-orange"

@@ -9,6 +9,7 @@ import ArticleCompo from "./components/ArticleCompo";
 import OtherArticles from "./components/OtherArticles";
 import Comments from "./components/Comments";
 import { generateMetadata } from "./metadata";
+import HandleViewCount from "./components/HandleViewCount";
 
 export { generateMetadata };
 
@@ -48,6 +49,7 @@ const Article = async ({ params }) => {
           </div>
         </div>
       </div>
+      <HandleViewCount articleId={articleId} />
       <Footer />
     </main>
   );

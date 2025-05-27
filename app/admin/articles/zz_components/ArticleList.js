@@ -1,19 +1,40 @@
 import { useState } from "react";
-import { fetchArticlesWithPage, publishArticle } from "../service";
+import {
+  fetchArticlesWithPage,
+  publishArticle,
+  updateBreakingNews,
+  updateEditorPick,
+  updateHeadline,
+} from "../service";
 import { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@material-tailwind/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Checkbox } from "@material-tailwind/react";
 
 const ArticleList = ({ page }) => {
+  const [filter, setFilter] = useState("");
   const queryClient = useQueryClient();
   const { data: articles, isLoading } = useQuery({
-    queryKey: ["articles", page],
-    queryFn: () => fetchArticlesWithPage(page),
+    queryKey: ["articles", page, filter],
+    queryFn: () => fetchArticlesWithPage(page, filter),
   });
   const publishedMutation = useMutation({
     mutationFn: ({ id, isPublished }) => publishArticle(id, isPublished),
-    onSuccess: () => queryClient.invalidateQueries(["articles", page]),
+    onSuccess: () => queryClient.invalidateQueries(["articles", page, filter]),
+  });
+  const headlineMutation = useMutation({
+    mutationFn: ({ id, isHeadline }) => updateHeadline(id, isHeadline),
+    onSuccess: () => queryClient.invalidateQueries(["articles", page, filter]),
+  });
+  const editorPickMutation = useMutation({
+    mutationFn: ({ id, isEditorPick }) => updateEditorPick(id, isEditorPick),
+    onSuccess: () => queryClient.invalidateQueries(["articles", page, filter]),
+  });
+  const breakingNewsMutation = useMutation({
+    mutationFn: ({ id, isBreakingNews }) =>
+      updateBreakingNews(id, isBreakingNews),
+    onSuccess: () => queryClient.invalidateQueries(["articles", page, filter]),
   });
 
   // const [articles, setArticles] = useState([]);
@@ -28,12 +49,34 @@ const ArticleList = ({ page }) => {
   //   setLoading(false);
   // };
 
+  const onCheck = (isChecked, type) => {
+    if (isChecked) setFilter(type);
+    else setFilter("");
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <>
+      <div className="flex flex-wrap items-center">
+        <Checkbox
+          checked={filter === "is_headline"}
+          onChange={(e) => onCheck(e.target.checked, "is_headline")}
+        />
+        <p>헤드라인 만</p>
+        <Checkbox
+          checked={filter === "is_editor_pick"}
+          onChange={(e) => onCheck(e.target.checked, "is_editor_pick")}
+        />
+        <p>에디터픽 만</p>
+        <Checkbox
+          checked={filter === "is_breaking_news"}
+          onChange={(e) => onCheck(e.target.checked, "is_breaking_news")}
+        />
+        <p>속보 만</p>
+      </div>
       {articles?.map((article) => (
         <div
           key={article.id}
@@ -76,6 +119,45 @@ const ArticleList = ({ page }) => {
             </div>
           </Link>
           <div className="mt-4">
+            <Button
+              onClick={() =>
+                headlineMutation.mutate({
+                  id: article.id,
+                  isHeadline: article.is_headline,
+                })
+              }
+              disabled={headlineMutation.isPending}
+              className="mr-3"
+              color={article.is_headline ? "deep-purple" : "purple"}
+            >
+              {article.is_headline ? "헤드라인 해제" : "헤드라인으로"}
+            </Button>
+            <Button
+              onClick={() =>
+                editorPickMutation.mutate({
+                  id: article.id,
+                  isEditorPick: article.is_editor_pick,
+                })
+              }
+              disabled={editorPickMutation.isPending}
+              className="mr-3"
+              color={article.is_editor_pick ? "deep-purple" : "purple"}
+            >
+              {article.is_editor_pick ? "에디터픽 해제" : "에디터픽으로"}
+            </Button>
+            <Button
+              onClick={() =>
+                breakingNewsMutation.mutate({
+                  id: article.id,
+                  isBreakingNews: article.is_breaking_news,
+                })
+              }
+              disabled={breakingNewsMutation.isPending}
+              className="mr-3"
+              color={article.is_breaking_news ? "deep-purple" : "purple"}
+            >
+              {article.is_breaking_news ? "속보 취소" : "속보로"}
+            </Button>
             <Button
               onClick={() =>
                 publishedMutation.mutate({

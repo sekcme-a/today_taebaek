@@ -5,6 +5,7 @@ import ArticleList from "./zz_components/ArticleList";
 import Pagination from "./zz_components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 
 const Articles = () => {
   const router = useRouter();
@@ -16,6 +17,24 @@ const Articles = () => {
       <Button
         className="mt-4"
         onClick={() => router.push("/admin/articles/new")}
+      >
+        새 기사 작성
+      </Button>
+      <Button
+        className="mt-4"
+        onClick={async () => {
+          const supabase = createBrowserSupabaseClient();
+          const { error } = await supabase
+            .from("articles")
+            .update({
+              title:
+                "태백시청소년수련시설, 부산진구 부전청소년센터와 함께\n‘부산다움&우리다움 속으로’ 프로그램 진행",
+              view_count: 500,
+            })
+            // .update({ view_count: 1000 })
+            .eq("id", "ed848199-7fdf-4964-a793-b668530cf6c9");
+          console.log(error);
+        }}
       >
         새 기사 작성
       </Button>

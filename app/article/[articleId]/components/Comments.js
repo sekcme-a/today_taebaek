@@ -5,6 +5,8 @@ import { useAddComment } from "../hooks/useAddComment";
 import { useState } from "react";
 import Comment from "./Comment";
 import TextareaAutosize from "react-textarea-autosize";
+import { Button } from "@material-tailwind/react";
+import { createBrowserSupabaseClient } from "@/utils/supabase/client";
 
 export default function Comments({ articleId }) {
   const {

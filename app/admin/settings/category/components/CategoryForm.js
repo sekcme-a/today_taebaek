@@ -45,6 +45,9 @@ export default function CategoryForm({ selected, onFinish }) {
     if (!name.trim()) {
       alert("카테고리 이름을 입력해 주세요!");
       return;
+    } else if (!order.trim()) {
+      alert("순서를 입력해주세요");
+      return;
     }
     mutation.mutate();
   };
@@ -69,7 +72,9 @@ export default function CategoryForm({ selected, onFinish }) {
             label="순서"
             type="number"
             value={order}
-            onChange={(e) => setOrder(Number(e.target.value))}
+            onChange={(e) =>
+              setOrder(e.target.value === "" ? "" : Number(e.target.value))
+            }
             required
           />
         </div>
