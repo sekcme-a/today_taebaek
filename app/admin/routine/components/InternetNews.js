@@ -1,24 +1,33 @@
 import { Button } from "@material-tailwind/react";
 
 const InternetNews = () => {
-  const onButtonClick = async () => {
-    window.open(
-      "http://www.asinews.co.kr/adm/news/addArticleForm.do?vStartP=123415184",
-      "_blank"
-    );
-    setTimeout(() => {
-      window.open("/admin/crawling/ansan", "_blank");
-      setTimeout(() => {
-        window.open(
-          "http://www.shinews.co.kr/adm/news/addArticleForm.do?vStartP=123415184",
-          "_blank"
-        );
-        setTimeout(() => {
-          window.open("/admin/crawling", "_blank");
-        }, 200);
-      }, 200);
-    }, 200);
-  };
+  // const onButtonClick = () => {
+  //   const urls = [
+  //     "http://www.asinews.co.kr/adm/news/addArticleForm.do?vStartP=123415184",
+  //     "/admin/crawling/ansan",
+  //     "http://www.shinews.co.kr/adm/news/addArticleForm.do?vStartP=123415184",
+  //     "/admin/crawling",
+  //   ];
+
+  //   for (const url of urls) {
+  //     window.open(url, "_blank");
+  //   }
+  // };
+
+  const urls = [
+    { label: "시흥 크롤링", url: "/admin/crawling" },
+    {
+      label: "시흥뉴스 작성",
+      url: "http://www.shinews.co.kr/adm/news/addArticleForm.do?vStartP=123415184",
+    },
+    { label: "안산 크롤링", url: "/admin/crawling/ansan" },
+
+    {
+      label: "안산뉴스 작성",
+      url: "http://www.asinews.co.kr/adm/news/addArticleForm.do?vStartP=123415184",
+    },
+  ];
+
   return (
     <>
       <h1 className="font-bold text-2xl">인터넷 뉴스 업로드</h1>
@@ -26,9 +35,19 @@ const InternetNews = () => {
       <p className="mt-10 text-lg">
         {`1. 아래의 버튼을 누르고, 순서대로 탭의 1,2,3,4번에 위치시켜줍니다.`}
       </p>
-      <Button fullWidth onClick={onButtonClick} className="mt-2">
-        크롤링 준비
-      </Button>
+      <p className="mt-2">
+        *일부러 역순으로 버튼 배치. 순서대로 클릭하면 된다.
+      </p>
+      {urls.map(({ label, url }) => (
+        <Button
+          fullWidth
+          key={url}
+          onClick={() => window.open(url, "_blank")}
+          className="mt-2"
+        >
+          {label}
+        </Button>
+      ))}
       <p className="mt-10 text-lg">
         {`2. 안산, 시흥 크롤링 모두 날짜를 선택한 후, "크롤링" 버튼 클릭, 완료되면
         "이동" 버튼 클릭`}

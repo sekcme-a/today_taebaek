@@ -25,11 +25,16 @@ export default function CrawledLinks() {
   const [openRoom, setOpenRoom] = useState(false);
 
   const handleCrawl = async () => {
-    setLoading(true);
-    const res = await fetch(`/api/crawl?start=${start}&end=${end}`);
-    const data = await res.json();
-    setPosts(data.posts);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/crawl?start=${start}&end=${end}`);
+      const data = await res.json();
+      setPosts(data.posts);
+      setLoading(false);
+    } catch (e) {
+      alert("너무 오래걸립니다. 시작페이지를 조정해주세요.");
+      alert(e);
+    }
   };
 
   if (openRoom) return <Room setOpenRoom={setOpenRoom} posts={posts} />;
